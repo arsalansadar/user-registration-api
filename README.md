@@ -66,7 +66,9 @@ Fetch User Info → GET /api/auth/me → add header:
 Authorization: Bearer <accessToken>
 
 git clone https://github.com/arsalansadar/user-registration-api.git
+
 cd user-registration-api
+
 mvn spring-boot:run
 
 
