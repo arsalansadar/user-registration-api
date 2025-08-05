@@ -11,10 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -39,6 +37,13 @@ public class AuthController {
         );
         String token = jwtUtil.generateToken(request.getUsername());
         return ResponseEntity.ok(new LoginResponse(token));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<User> getMyInfo(Authentication authentication){
+        User currentUser = userService.getCurrentUser(authentication.getName());
+        return ResponseEntity.ok(currentUser);
+
     }
 
 }
