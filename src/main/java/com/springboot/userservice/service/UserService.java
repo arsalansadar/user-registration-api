@@ -15,11 +15,11 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public User register(UserRegistrationRequest request) {
-        User user = User.builder()
-                .username(request.getUsername())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .build();
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         return userRepository.save(user);
+
     }
 }
