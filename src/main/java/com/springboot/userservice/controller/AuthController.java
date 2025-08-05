@@ -3,6 +3,7 @@ package com.springboot.userservice.controller;
 import com.springboot.userservice.dto.LoginRequest;
 import com.springboot.userservice.dto.LoginResponse;
 import com.springboot.userservice.dto.UserRegistrationRequest;
+import com.springboot.userservice.dto.UserResponseDTO;
 import com.springboot.userservice.entity.User;
 import com.springboot.userservice.service.UserService;
 import com.springboot.userservice.util.JwtUtil;
@@ -40,8 +41,8 @@ public class AuthController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<User> getMyInfo(Authentication authentication){
-        User currentUser = userService.getCurrentUser(authentication.getName());
+    public ResponseEntity<UserResponseDTO> getMyInfo(Authentication authentication){
+        UserResponseDTO currentUser = userService.getCurrentUser(authentication.getName());
         return ResponseEntity.ok(currentUser);
 
     }

@@ -1,6 +1,7 @@
 package com.springboot.userservice.service;
 
 import com.springboot.userservice.dto.UserRegistrationRequest;
+import com.springboot.userservice.dto.UserResponseDTO;
 import com.springboot.userservice.entity.User;
 import com.springboot.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,9 @@ public class UserService {
 
     }
 
-    public User getCurrentUser(String username){
+    public UserResponseDTO getCurrentUser(String username){
         User user = userRepository.findByUsername(username)
                 .orElseThrow(()-> new RuntimeException("User not found"));
-        return user;
+        return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
     }
 }
